@@ -43,7 +43,19 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please enter product brand"],
       enum: {
-        values: ["Apple", "Oppo", "Samsung", "Sony", "Xiaomi", "Nokia"],
+        values: [
+          "Apple",
+          "Oppo",
+          "Samsung",
+          "Sony",
+          "Xiaomi",
+          "Nokia",
+          "Acer",
+          "Asus",
+          "Dell",
+          "HP",
+          "Macbook",
+        ],
       },
     },
     seller: {
