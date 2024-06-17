@@ -40,9 +40,14 @@ export const loginUser = catchAsyncError(async (req, res, next) => {
   if (!isPasswordMatched) {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
+  res.clearCookie("token");
   const token = await user.getJwtToken();
-
-  sendToken(user, 200, res);
+  res.cookie("token", token, {
+    httpOnly: true,
+    maxAge: new Date(
+      Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
+    ),
+  });
 });
 // Logout user  =>  /api/v1/logout
 export const logout = catchAsyncError(async (req, res, next) => {
@@ -135,7 +140,14 @@ export const resetPassword = catchAsyncError(async (req, res, next) => {
   user.resetPasswordToken = undefined;
   user.resetPasswordExpire = undefined;
   await user.save();
-  sendToken(user, 200, res);
+  const token = await user.getJwtToken();
+  res.cookie("token", token, {
+    httpOnly: true,
+    maxAge: new Date(
+      Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
+    ),
+  });
+  // sendToken(user, 200, res);
 });
 
 // Get current user profile  => /api/v1/me
