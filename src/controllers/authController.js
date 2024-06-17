@@ -44,6 +44,8 @@ export const loginUser = catchAsyncError(async (req, res, next) => {
   const token = await user.getJwtToken();
   res.cookie("token", token, {
     httpOnly: true,
+    secure: true,
+    sameSite: "None",
     maxAge: new Date(
       Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
     ),
@@ -57,6 +59,7 @@ export const loginUser = catchAsyncError(async (req, res, next) => {
 export const logout = catchAsyncError(async (req, res, next) => {
   res.cookie("token", null, {
     expires: new Date(Date.now()),
+    secure: true,
     httpOnly: true,
   });
   res.status(200).json({
@@ -147,6 +150,7 @@ export const resetPassword = catchAsyncError(async (req, res, next) => {
   const token = await user.getJwtToken();
   res.cookie("token", token, {
     httpOnly: true,
+    secure: true,
     maxAge: new Date(
       Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
     ),
