@@ -51,7 +51,7 @@ export const loginUser = catchAsyncError(async (req, res, next) => {
   //   ),
   // });
   console.log(">>>>check cookie: ");
-  sendToken(user, 200, res);
+  await sendToken(user, 200, res);
   // return res.status(200).json({
   //   message: "dang nhap thanh cong",
   // });
