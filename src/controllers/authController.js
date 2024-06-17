@@ -41,19 +41,20 @@ export const loginUser = catchAsyncError(async (req, res, next) => {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
   res.clearCookie("token");
-  const token = await user.getJwtToken();
-  res.cookie("token", token, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "None",
-    maxAge: new Date(
-      Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
-    ),
-  });
+  // const token = await user.getJwtToken();
+  // res.cookie("token", token, {
+  //   httpOnly: true,
+  //   secure: true,
+  //   sameSite: "None",
+  //   maxAge: new Date(
+  //     Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
+  //   ),
+  // });
   console.log(">>>>check cookie: ");
-  return res.status(200).json({
-    message: "dang nhap thanh cong",
-  });
+  sendToken(user, 200, res);
+  // return res.status(200).json({
+  //   message: "dang nhap thanh cong",
+  // });
 });
 // Logout user  =>  /api/v1/logout
 export const logout = catchAsyncError(async (req, res, next) => {
