@@ -147,6 +147,9 @@ export const resetPassword = catchAsyncError(async (req, res, next) => {
       Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
     ),
   });
+  return res.status(200).json({
+    message: "Dang nhap thanh cong",
+  });
   // sendToken(user, 200, res);
 });
 
