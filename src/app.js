@@ -22,22 +22,25 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 }
 
 // Config CORS
-app.use(
-  cors({
-    origin: "https://frontend.vanhuu1904.click",
-    credentials: true,
-  })
-);
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", process.env.FRONTEND_URL);
-//   res.header("Access-Control-Allow-Headers", true);
-//   res.header("Access-Control-Allow-Credentials", true);
-//   res.header(
-//     "Access-Control-Allow-Methods",
-//     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-//   );
-//   next();
-// });
+// app.use(
+//   cors({
+//     origin: "https://frontend.vanhuu1904.click",
+//     credentials: true,
+//   })
+// );
+app.use(function (req, res, next) {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://frontend.vanhuu1904.click"
+  );
+  res.header("Access-Control-Allow-Headers", true);
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  next();
+});
 
 //  Connecting to database
 connectDatabase();
