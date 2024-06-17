@@ -48,6 +48,10 @@ export const loginUser = catchAsyncError(async (req, res, next) => {
       Date.now() + process.env.COOKIE_EXPIRES_TIME * 24 * 60 * 60 * 1000
     ),
   });
+  console.log(">>>>check cookie: ");
+  return res.status(200).json({
+    message: "dang nhap thanh cong",
+  });
 });
 // Logout user  =>  /api/v1/logout
 export const logout = catchAsyncError(async (req, res, next) => {
