@@ -24,7 +24,7 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 // Config CORS
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: "https://frontend.vanhuu1904.click",
     credentials: true,
   })
 );
