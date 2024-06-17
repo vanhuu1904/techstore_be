@@ -6,11 +6,12 @@ import catchAsyncError from "./catchAsyncError.js";
 // checks if user is authenticated or not
 export const isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
   const { token } = req.cookies;
-  console.log(">>>check data: ", token);
+  console.log(">>>check token: ", token);
   if (!token) {
     return next(new ErrorHandler("Login first to access this resource", 401));
   }
   const decode = jwt.verify(token, process.env.JWT_SECRET);
+  console.log(">>>decode: ", decode);
   req.user = await User.findById(decode.id);
   next();
 });
